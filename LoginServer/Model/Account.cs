@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +9,13 @@ namespace LoginServer.Model
 {
     public class Account
     {
-        public int Uid;
-        public string Name;
-        public string Password;
-        public string Token;
-        public int Cash;
+        //public int Uid;
+        public ObjectId Id { get; set; }
+        public string Name { get; set; }
+        public string Password { get; set; }
+        public string Token { get; set; }
+        public int Cash { get; set; }
 
-        public string LastIpAddress;
+        public string LastIpAddress { get; set; }
     }
 }

@@ -24,10 +24,10 @@ namespace LoginServer.Config
         public static string Game_Host = Network.GetString("game.listener.ip");
         public static int Game_Port = Network.GetInt("game.listener.port");
 
-        public static string Db_Host = Database.GetString("db.mysql.host");
-        public static string Db_User = Database.GetString("db.mysql.user");
-        public static string Db_Pass = Database.GetString("db.mysql.pass");
-        public static string Db_Name = Database.GetString("db.mysql.name");
+        public static string Db_Url = Database.GetString("db.mongo.url");
+        public static string Db_Name = Database.GetString("db.mongo.name");
+
+        
 
         public static bool Misc_AutoAccount = Misc.GetBoolean("misc.autoaccount");
         public static bool Misc_Debug = Misc.GetBoolean("misc.debug");
