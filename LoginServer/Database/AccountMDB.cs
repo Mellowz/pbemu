@@ -35,10 +35,10 @@ namespace LoginServer.Database
             collection.Insert(account);
         }
 
-        public Account GetAccountByToken(string token)
+        public Account GetAccountByLogin(string login)
         {
             var collection = database.GetCollection<Account>("accounts");
-            var query = Query<Account>.EQ(e => e.Token, token);
+            var query = Query<Account>.EQ(e => e.Login, login);
             var account = collection.FindOne(query);
             return (account != null) ? account : null;
         }

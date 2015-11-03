@@ -25,8 +25,8 @@ namespace LoginServer.Network.Send
 
             WriteD(0);
 
-            WriteC((byte)Account.Name.Length);
-            WriteS(Account.Name);
+            WriteC((byte)Account.Login.Length);
+            WriteS(Account.Login);
         }
     }
 }

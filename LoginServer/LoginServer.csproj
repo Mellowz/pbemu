@@ -65,7 +65,7 @@
     <Compile Include="Network\ClientManager.cs" />
     <Compile Include="Network\LoginFactory.cs" />
     <Compile Include="Network\Opcode.cs" />
-    <Compile Include="Network\Recv\RpTokenAuth.cs" />
+    <Compile Include="Network\Recv\RpAuth.cs" />
     <Compile Include="Network\Send\SpAccountAuth.cs" />
     <Compile Include="Network\Send\SpInit.cs" />
     <Compile Include="Program.cs" />

@@ -17,7 +17,7 @@ namespace LoginServer.Network
         {
             #region Recv
 
-            Recv.Add(unchecked((short)0x0A72), typeof(RpTokenAuth));
+            Recv.Add(unchecked((short)0x0101), typeof(RpAuth));
 
             #endregion
 

@@ -2,27 +2,34 @@
 using LoginServer.Database;
 using LoginServer.Model;
 using LoginServer.Network.Send;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LoginServer.Network.Recv
 {
-    public class RpTokenAuth : ARecvPacket
+    public class RpAuth : ARecvPacket
     {
-        protected string Token;
+        protected string Login;
+
+        protected string Passwd;
 
         protected internal override void Read()
         {
             Log.Debug("Unk1 = {0}", ReadH());
-            Log.Debug("Unk2 = {0}", ReadC());
+
+            Login = ReadS(ReadC());
+            Log.Debug("Login = {0}", Login);
+
+            Passwd = ReadS(ReadH());
+            Log.Debug("Passwd = {0}", Passwd);
+
+            Log.Debug("Unk2 = {0}", ReadH());
             Log.Debug("Unk3 = {0}", ReadH());
-            Log.Debug("Unk4 = {0}", ReadH());
-            Token = ReadS(ReadH());
-            Log.Debug("Token = {0}", Token);
+            Log.Debug("Unk4 = {0}", ReadC());
+            Log.Debug("Unk5 = {0}", ReadH());
+            Log.Debug("Unk6 = {0}", ReadB(16).FormatHex());
+            Log.Debug("Unk7 = {0}", (char)ReadC());
+            Log.Debug("Unk8 = {0}", ReadS(ReadC()));
+            Log.Debug("Unk9 = {0}", ReadB(15).FormatHex());
+            Log.Debug("Unk10 = {0}", ReadC());
         }
 
         protected internal override void Run()
@@ -31,9 +38,8 @@ namespace LoginServer.Network.Recv
             {
                 var acc = new Account()
                 {
-                    Name = "test",
-                    Password = "test",
-                    Token = Token, // ใช้เพื่อทดสอบ
+                    Login = Login,
+                    Password = Passwd,
                     Cash = 0,
                     LastIpAddress = _Client._account.LastIpAddress
                 };
@@ -41,7 +47,7 @@ namespace LoginServer.Network.Recv
                 AccountMDB.GetInstance().CreateAccounnt(acc);
             }
 
-            var account = AccountMDB.GetInstance().GetAccountByToken(Token); //AccountDatabase.GetInstance().GetAccountByToken(Token);
+            var account = AccountMDB.GetInstance().GetAccountByLogin(Login); //AccountDatabase.GetInstance().GetAccountByToken(Token);
 
             if (account != null)
             {
