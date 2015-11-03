@@ -19,7 +19,7 @@ namespace LoginServer.Network
         public Account _account;
         public LoginCrypt _Crypt;
 
-        public int CRYPT_KEY { get; set; }
+        bool flag = false;
 
         public Client(TcpClient tcpClient)
         {
@@ -63,7 +63,12 @@ namespace LoginServer.Network
                 if (this._stream.EndRead(ar) <= 0)
                     return;
 
-                byte num = this._buffer[0];
+                ushort num = BitConverter.ToUInt16(this._buffer, 0);
+                if (num > 8908)
+                {
+                    num = Convert.ToUInt16((int)(num & 32767));
+                    flag = true;
+                }
                 if (this._stream.DataAvailable)
                 {
                     this._buffer = new byte[(int)num + 2];
@@ -83,7 +88,7 @@ namespace LoginServer.Network
             byte[] data = new byte[this._buffer.Length];
             this._buffer.CopyTo((Array)data, 0);
 
-            if (data.Length >= 2)
+            if (data.Length >= 2 && flag)
                 handlePacket(_Crypt.Decrypt(data));
 
             new Thread(new ThreadStart(this.read)).Start();

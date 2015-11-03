@@ -23,7 +23,7 @@ namespace LoginServer.Network
 
             #region Send
 
-            Send.Add(typeof(SpInit), unchecked((short)0x0801));
+            Send.Add(typeof(SpInit), unchecked((short)0x0202));
             Send.Add(typeof(SpAccountAuth), unchecked((short)0x0A04));
 
             #endregion

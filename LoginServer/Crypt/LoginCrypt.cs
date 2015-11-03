@@ -14,9 +14,9 @@ namespace LoginServer.Crypt
         /// </summary>
         protected int CRYPT_KEY = -1;
 
-        public int GetId()
+        public short GetId()
         {
-            return GetHashCode() / 4096;
+            return (short)(GetHashCode() / 4096);
         }
 
         public int GetKey()
